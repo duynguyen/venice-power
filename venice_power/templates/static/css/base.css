@@ -1,0 +1,142 @@
+.annotate_canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.error {
+	color: red;
+}
+
+.success {
+  color: green;
+}
+
+.painting {
+	position: relative;
+	margin: 20px 0;
+}
+
+#existing_canvas {
+	z-index: 2;
+}
+
+#annotate_canvas {
+	z-index: 3;
+	cursor: pointer;
+}
+
+#item_list {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.item {
+  position: absolute;
+  opacity: 0;
+}
+
+.annotate_item {
+  opacity: 0.2;
+}
+
+.cyan {
+  background-color: cyan;
+}
+
+.green {
+  background-color: green;
+}
+
+.chosen_item {
+  opacity: 0.4;
+  border: 1px solid blue;
+  background-color: blue;
+}
+
+.item:hover {
+  opacity: 0.3;
+}
+
+#dialog-modal {
+  font: 13px sans-serif;
+}
+
+.interaction_panel {
+
+}
+
+.vote_panel {
+  width: 600px;
+}
+
+.comment_panel {
+  width: 450px;
+}
+
+.annotation_list, .comment_list {
+  overflow: auto;
+  margin: 10px 0;
+}
+
+.annotation_list {
+  max-height: 350px;
+}
+
+.comment_list {
+  max-height: 200px;
+}
+
+.annotation_item, .comment_item {
+  border-bottom: 1px solid #888;
+}
+
+.annotation_left {
+  padding: 10px;
+  float: left;
+  max-width: 450px;
+}
+
+.annotation_right {
+  padding: 10px;
+  float: right;
+}
+
+.vote_wrapper {
+  width: 30px;
+  text-align: center;
+}
+
+.mytooltip {
+  display: none;
+  position: absolute;
+  border: 1px solid #333;
+  background-color: #161616;
+  border-radius: 5px;
+  padding: 10px;
+  color: #fff;
+  font-size: 12px Arial;
+  z-index: 2;
+}
+
+.hidden {
+	display: none;
+}
+
+.footer {
+  clear: left;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.clear_both {
+  clear: both;
+}

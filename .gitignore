@@ -1,0 +1,5 @@
+.elasticbeanstalk/
+*.pyc
+venice_power_env/
+*.DS_Store
+venice_power/static/

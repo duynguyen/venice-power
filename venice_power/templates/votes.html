@@ -1,0 +1,41 @@
+{% load voting_tags %}
+{% votes_by_user user on link_list as vote_dict %}
+{% scores_for_objects link_list as score_dict %}
+
+<table>
+<col width="1"></col>
+<col></col>
+<thead>
+  <tr>
+    <th>Vote</th>
+    <th>Link</th>
+  </tr>
+</thead>
+<tbody>
+  {% for link in link_list %}<tr class="{% cycle odd,even %}">
+    <td class="vote">
+		{% dict_entry_for_item link from vote_dict as vote %}
+		{% dict_entry_for_item link from score_dict as score %}
+		<form class="linkvote" id="linkup{{ link.id }}" action="{{ link.id }}/{% if vote and vote.is_upvote %}clear{% else %}up{% endif %}vote/" method="POST">
+	        <input type="image" id="linkuparrow{{ link.id }}" src="{{ media_url }}img/aup{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.png">
+	    </form>
+
+    	<form class="linkvote" id="linkdown{{ link.id }}" action="{{ link.id }}/{% if vote and vote.is_downvote %}clear{% else %}down{% endif %}vote/" method="POST">
+        	<input type="image" id="linkdownarrow{{ link.id }}" src="{{ media_url }}img/adown{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.png">
+    	</form>
+    </td>
+    <td class="item">
+      <a href="{{ link.url }}">{{ link.title|escape }}</a></h2>
+      <p class="details">
+        <span class="score" id="linkscore{{ link.id }}"
+              title="after {{ score.num_votes|default:0 }} vote{{ score.num_votes|default:0|pluralize }}">
+         {{ score.score|default:0 }} point{{ score.score|default:0|pluralize }}
+        </span>
+        posted {{ link.created|timesince }} ago by
+        <span class="user"><a href="../users/{{ link.user.id }}/">{{ link.user.get_full_name|escape }}</a></span>
+        <span class="details"><a href="{{ link.get_absolute_url }}">details</a></span>
+      </p>
+    </td>
+  </tr>{% endfor %}
+</tbody>
+</table>

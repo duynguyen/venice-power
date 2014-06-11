@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Visualization per lecture video{% endblock %}
+
+{% block content %}
+<h3>Examples</h3>
+<p>Here are some examples of annotation</p>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<div class="row">
+{% for p in painting_list %}
+	<div class="col-sm-6 col-md-4">
+		<div class="thumbnail">
+			<img src="">
+			<div class="caption">
+				<h4>{{ p.name }}</h4>
+				<p>{{ p.description }}</p>
+				<p>
+					<a href="/paintings/{{ p.id }}/" class="btn btn-success">View</a>
+				</p>
+			</div>
+		</div>
+	</div>
+{% endfor %}
+</div>
+{% endblock %}

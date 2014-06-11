@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css">
+    <!-- <link rel="stylesheet" href="{{ STATIC_URL }}css/example-fixed-layout.css"> -->
+</head>
+<body>
+    <div class="container">
+        <h1>Visualization of power in Venice</h1>
+    	{% include "nav.html" %}
+        {% block content %}{% endblock %}
+        {% block footer %}
+            <div class="footer">
+                <hr>
+                <p>DH101 course. DHLab. EPFL.</p>
+            </div>
+        {% endblock %}
+    </div>
+</body>
+</html>

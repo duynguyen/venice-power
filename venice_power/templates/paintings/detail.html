@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Annotations of painting{% endblock %}
+
+{% block content %}
+<h3 class="left">{{ painting.name }}</h3>
+{% if not painting.is_example %}
+	<a href="/annotate/{{ painting.id }}/" class="btn btn-warning right">Annotate the painting</a>
+{% endif %}
+<div class="clear_both"></div>
+<p>{{ painting.description }}</p>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<div class="left"><label for="display_option">Display all annotations</label> <input type="checkbox" id="display_option" /></div>
+<img class="right" src="{{ STATIC_URL }}img/legend.png" style="width:150px;margin-left:100px;">
+<button id="export_btn" class="right">Export</button>
+<div class="clear_both"></div>
+<div style="width:100%;overflow:auto;">
+	<div id="painting" class="painting" style="background: #ffffff url('') no-repeat;border: 1px solid black;width: {{ painting.image.width }}px;height: {{ painting.image.height }}px;">
+		<div id="item_list"></div>
+	</div>
+</div>
+{% if not painting.is_example %}
+<div class="interaction_panel">
+	<div class="vote_panel left hidden">
+		<h4 id="chosen_name"></h4>
+		<p id="chosen_description"></p>
+		<h4>Annotations</h4>
+		<div id="annotation_list" class="annotation_list"></div>
+		<div class="clear_both"></div>
+		<p><button id="add_annotation">New annotation</button></p>
+		<span id="annotation_error" class="error"></span>
+		<span id="annotation_success" class="success"></span>
+		<form class="form-horizontal hidden" id="add_annotation_form" role="form" action="#" method="get">{% csrf_token %}
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="annotation_name">Title</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="annotation_name" placeholder="Name..." name="name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="annotation_description">Description</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" rows="3" id="annotation_description" name="description"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+					<div class="radio">
+						<label for="type_person">Person</label>
+						<input type="radio" id="type_person" name="type" value="person" checked>
+					</div>
+					<div class="radio">
+						<label for="type_item">Item</label>
+						<input type="radio" id="type_item" name="type" value="item">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+		    	<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default" id="new_annotation_submit">Submit</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="comment_panel right">
+		<h3>Comments</h3>
+		<span id="comment_error" class="error"></span>
+		<span id="comment_success" class="success"></span>
+		<form class="form-horizontal" role="form" id="add_comment_form" action="#" method="get">{% csrf_token %}
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="comment_name">Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="comment_name" name="name" placeholder="Your name...">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="comment_content">Content</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" id="comment_content" name="content" placeholder="Comment..."></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2">
+					<button type="submit" id="add_comment_btn" class="btn btn-default">Comment</button>
+				</div>
+			</div>
+		</form>
+		<div id="comment_list" class="comment_list"></div>
+	</div>
+</div>
+{% else %}
+<div class="interaction_panel">
+	<div class="vote_panel left hidden">
+		<h4 id="chosen_name"></h4>
+		<p id="chosen_description"></p>
+	</div>
+</div>
+{% endif %}
+<div class="clear_both"></div>
+<script src="{{ STATIC_URL }}js/paintings.js" text="javascript"></script>
+{% endblock %}

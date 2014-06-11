@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="{{ STATIC_URL }}css/base.css">
+<style>
+body {
+	margin: 0;
+}
+</style>
+<div id="painting" style="background: #ffffff url('{{ painting.image.url }}') no-repeat;position:relative;width: {{ painting.image.width }}px;height: {{ painting.image.height }}px;">
+	<div id="item_list"></div>
+</div>
+<canvas id="existing_canvas" class="annotate_canvas" width="{{ painting.image.width }}" height="{{ painting.image.height }}"></canvas>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+var items;
+$.ajax({
+  dataType: "json",
+  url: "json/",
+  async: false,
+  success: function(data){
+    items = data;
+  }
+});
+var ctx = document.getElementById("existing_canvas").getContext("2d");
+$.each(items, function(i, item) {
+	$("#item_list").append('<div class="item annotate_item ' + (item.type == "person" ? "cyan" : "green") + '" id="item_' + item.id + '" style="width:' + item.width + 'px; height:' + item.height + 'px; top:' + item.top + 'px; left:' + item.left + 'px;"></div>');
+		ctx.fillStyle = "black";
+		ctx.globalAlpha = 1
+		ctx.font="14px Georgia";
+		ctx.fillText(item.id, item.left + 1, item.top + 15);
+});
+window.open('objects/', '_blank');
+</script>

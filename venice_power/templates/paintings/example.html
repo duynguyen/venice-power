@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Annotation per painting{% endblock %}
+
+{% block content %}
+<h3>{{ painting.name }}</h3>
+<p>{{ painting.description }}</p>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<label for="display_option">Display all annotations</label> <input type="checkbox" id="display_option" />
+<div id="painting" class="painting" style="background: #ffffff url('') no-repeat;border: 1px solid black;width: {{ painting.image.width }}px;height: {{ painting.image.height }}px;">
+	<div id="item_list"></div>
+</div>
+<img id="painting_img" class="hidden" src="" />
+<canvas id="existing_canvas" class="annotate_canvas hidden" width="{{ painting.image.width }}" height="{{ painting.image.height }}"></canvas>
+<button id="export_btn">Export</button>
+<div id="dialog-modal" class="hidden" title="Details">
+	<p id="item_desc"></p>
+	<button id="voteup_btn">Up</button>
+	<span id="vote_total"></span>
+	<button id="votedown_btn">Down</button>
+	<button id="unvote_btn">Unvote</button>
+</div>
+<script src="{{ STATIC_URL }}js/paintings.js" text="javascript"></script>
+{% endblock %}
